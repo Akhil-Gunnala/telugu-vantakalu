@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({
@@ -31,6 +32,21 @@ class _DetailsScreenState extends State<DetailsScreen> {
     });
   }
 
+  _onShareData() async {
+    List l2 = [
+      '''      
+     ${l1[0]}  
+     \n   కావాల్సిన పదార్ధాలు \n\n
+     ${l1[2]}
+     \n తయారు చేయు విధానం \n\n
+     
+     Read more....
+     https://www.facebook.com/
+         '''
+    ];
+    await Share.share(l2[0]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +59,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
           style: GoogleFonts.pacifico(
               fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.share,
+              color: Colors.white,
+            ),
+            onPressed: () => _onShareData(),
+          )
+        ],
       ),
       body: SafeArea(
         child: Container(
@@ -52,6 +77,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
+                  //decrement button
                   onPressed: () {
                     if (index > 1) {
                       setState(() {
@@ -90,8 +116,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                 ),
                 TextButton(
+                  //increment button
                   onPressed: () {
-                    // int length = list1.length - 1;
                     if (index < list.length - 1) {
                       setState(() {
                         index++;
